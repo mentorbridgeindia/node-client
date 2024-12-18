@@ -1,11 +1,11 @@
 import nodemailer from 'nodemailer';
 
 export const transporter = nodemailer.createTransport({
-    host: "smtp.forwardemail.net",
-    port: 465,
-    secure: true,
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-      user: "my_user",
-      pass: "my_password",
+      user: "Utsavppt@gmail.com",
+      pass: "gyaqflnmzdbvzrjl",
     },
   });

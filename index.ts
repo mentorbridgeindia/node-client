@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
+import bodyParser from "body-parser";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
 
 
+app.use(bodyParser.json());
 setupEmailRoutes(app);
 
 app.get("/getCountries", function (req, res) {

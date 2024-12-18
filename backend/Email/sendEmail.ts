@@ -5,13 +5,11 @@ import { transporter } from './transporter';
 
 export const setupEmailRoutes = (app: Express) => {
   app.post('/send-email', async (req: Request<{}, {}, EmailRequestBody>, res: Response) => {
-    const { from, to, cc, bcc, subject, type, info } = req.body;
+    const { from, to, subject, type, info } = req.body;
 
     const options = {
       from,
       to,
-      cc,
-      bcc,
       subject,
       html: getEmailContent(type, info),
     };
