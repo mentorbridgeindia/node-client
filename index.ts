@@ -2,31 +2,11 @@ const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
-
+import { cronJob } from "./backend/Scrap/cronJob";
+import scrapeMedium from "./backend/Scrap/scrapMedium";
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
-
-app.get("/getCountries", function (req, res) {
-  res.send([
-    {
-      id: 1,
-      name: "India", // get from OPEN AI API
-    },
-    {
-      id: 2,
-      name: "USA",
-    },
-    {
-      id: 3,
-      name: "Argentina",
-    },
-  ]);
-});
-
-app.post("/create-user", function (req, res) {
-  res.send("Hello world!");
-});
 
 app.use(express.json());
 
@@ -39,6 +19,8 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
-
-
-app.listen(3000);
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+  scrapeMedium("https://medium.com/tag/personal-development");
+  cronJob();
+});
