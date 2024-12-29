@@ -26,7 +26,7 @@ import {
     <Html>
       <Head />
       <Preview>
-        A fine-grained personal access token has been added to your account
+        A fine-grained personal access token has been added to your mail account
       </Preview>
       <Body style={main}>
         <Container style={container}>
