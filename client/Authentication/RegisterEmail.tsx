@@ -60,7 +60,7 @@ export default function AWSVerifyEmail({
             <Section style={lowerSection}>
               <Text style={cautionText}>
                 Amazon Web Services will never email you and ask you to disclose
-                or verify your password, credit card, or banking account number.
+                or verify your password, 
               </Text>
             </Section>
           </Section>
