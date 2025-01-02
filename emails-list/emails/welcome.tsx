@@ -88,7 +88,7 @@ export const StripeWelcomeEmail = () => (
           <Text style={paragraph}>— The Stripe team</Text>
           <Hr style={hr} />
           <Text style={footer}>
-            Stripe, 354 Oyster Point Blvd, South San Francisco, CA 94080
+            Stripe, 354 Oyster Point Bld, South San Francisco, CA 94080
           </Text>
         </Section>
       </Container>
