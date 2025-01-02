@@ -15,6 +15,6 @@ export const setupEmailRoutes = (app: Express) => {
     };
 
     await transporter.sendMail(options);
-    res.status(200).json({ message: "Email sended successfully" });
+    res.status(200).json({ message: "Email sent successfully" });
   });
 };
