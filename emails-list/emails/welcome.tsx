@@ -65,7 +65,7 @@ export const StripeWelcomeEmail = () => (
             <Link style={anchor} href="https://stripe.com/docs/dashboard">
               tutorial about account basics
             </Link>
-            .
+            
           </Text>
           <Text style={paragraph}>
             Finally, we've put together a{" "}
