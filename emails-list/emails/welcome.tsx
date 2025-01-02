@@ -83,7 +83,7 @@ export const StripeWelcomeEmail = () => (
             <Link style={anchor} href="https://support.stripe.com/">
               support site
             </Link>
-            .
+            
           </Text>
           <Text style={paragraph}>— The Stripe team</Text>
           <Hr style={hr} />
