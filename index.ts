@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
+import { setupAddRoute } from "./backend/Routes/addRoute";
+import { setupDefaultRoute } from "./backend/Routes/defaultRoute";
+import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
 import scrapeMedium from "./backend/Scrap/scrapMedium";
 
@@ -19,8 +22,12 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-  scrapeMedium("https://medium.com/tag/personal-development");
+setupDynamicRoutes(app);
+setupAddRoute(app);
+setupDefaultRoute(app);
+
+app.listen(4444, () => {
+  console.log("Server is running on port 4444");
+  // scrapeMedium("https://medium.com/tag/personal-development");
   cronJob();
 });
