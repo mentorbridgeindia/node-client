@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { callAi } from "../OpenAI/callAi";
+import { callAi } from "../Gemini/callAi";
 import scrapeWebPage from "./scrap";
 import { Medium } from "../Models/Medium";
 
@@ -54,13 +54,13 @@ const scrapeMedium = async (url: string) => {
         continue;
       }
       const aiResponse = await callAi(response.textContent);
-      if (!aiResponse) {
+      if (!aiResponse || aiResponse === null) {
         continue;
       }
       // save aiResponse to MongoDB in table "medium"
       const medium = new Medium({
         title: response.textContent.split("\n")[0],
-        content: aiResponse.content,
+        content: aiResponse?.content,
         images: response.images,
       });
       await medium.save();

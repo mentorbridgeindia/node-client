@@ -8,7 +8,9 @@ import { Route } from "./route.types";
 
 export const setupDynamicRoutes = (app: Express) => {
   getRoutes().forEach((route: Route) => {
-    const { path, method, response } = route;
+    const { applicationPath, url, method, response } = route;
+
+    const path = `${applicationPath}${url}`;
 
     switch (method) {
       case "GET":
