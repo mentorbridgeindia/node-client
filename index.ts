@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
-import { setupAddRoute } from "./backend/Routes/addRoute";
+import { setupUpdateRoute } from "./backend/Routes/addRoute";
 import { setupDefaultRoute } from "./backend/Routes/defaultRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 setupDynamicRoutes(app);
-setupAddRoute(app);
+setupUpdateRoute(app);
 setupDefaultRoute(app);
 
 app.listen(4444, () => {

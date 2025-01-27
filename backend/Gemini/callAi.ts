@@ -1,4 +1,5 @@
-export const callAi = async (mainContent: string, prompt?: string) => {
+import axios from "axios";
+export const callAi = async (prompt?: string) => {
   if (!prompt) {
     prompt =
       "Analyze this link and rephrase it in a way that is more engaging and easy to understand. Use simple words and phrases. Can you split the content into pages. Each page should not exceed more than 750 characters";
@@ -23,5 +24,5 @@ export const callAi = async (mainContent: string, prompt?: string) => {
     },
   };
   // TODO: call Gemini API with the request body
-  return null;
+  return axios.post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCKeI9zWmtj24YyV1UjFzOLHXTmvlUEsx4', requestBody);
 };
