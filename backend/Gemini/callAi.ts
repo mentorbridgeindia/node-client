@@ -1,27 +1,50 @@
-export const callAi = async (mainContent: string, prompt?: string) => {
-  if (!prompt) {
-    prompt =
-      "Analyze this link and rephrase it in a way that is more engaging and easy to understand. Use simple words and phrases. Can you split the content into pages. Each page should not exceed more than 750 characters";
+import axios from "axios";
+
+export const callAi = async (
+  prompt: string,
+  mainContent: string,
+  responseType?: string
+) => {
+  const generationConfig = {
+    temperature: 2,
+    topK: 40,
+    topP: 0.95,
+    maxOutputTokens: 8192,
+    responseMimeType: "text/plain",
+  };
+
+  if (responseType) {
+    generationConfig.responseMimeType = "application/json";
   }
-  // https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={{GEMINI_API_KEY}}
+
   const requestBody = {
     contents: [
       {
         parts: [
           {
-            text: prompt,
+            text: prompt + "\n" + mainContent,
           },
         ],
       },
     ],
-    generationConfig: {
-      temperature: 1,
-      topK: 40,
-      topP: 0.95,
-      maxOutputTokens: 8192,
-      responseMimeType: "text/plain",
-    },
+    generationConfig,
   };
-  // TODO: call Gemini API with the request body
-  return null;
+  console.log("Generating AI response", requestBody);
+  try {
+    const response = await axios.post(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAyhAfOqUr0dQy9DTbPPALKMoA7KGkw55M",
+      requestBody
+    );
+    console.log("AI response:", response.data);
+    const aiResponse = response.data?.candidates[0]?.content?.parts[0]?.text;
+    if (!aiResponse) {
+      console.error("No content returned from AI response.");
+      return null;
+    }
+    console.log(aiResponse);
+    return aiResponse;
+  } catch (error) {
+    console.error("Error during AI response generation:", error);
+    return null;
+  }
 };

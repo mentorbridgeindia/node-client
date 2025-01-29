@@ -7,7 +7,7 @@ export const getRoutes = () => {
       applicationPath: "/stuPro",
       url: "/hello",
       method: "GET",
-      response: { message: "Hello World!" },
+      response: { id: "string", code: "number" },
     },
     {
       id: "2",

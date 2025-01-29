@@ -33,6 +33,8 @@ const scrapeWebPage = async (
       .filter((text) => text.length > 0)
       .join("\n");
 
+    const title = $("title").text().trim();
+
     // TODO: Add AI call here to split the content into pages
 
     // Extract image URLs
@@ -51,13 +53,10 @@ const scrapeWebPage = async (
       }
     });
 
-    console.log(imageUrls);
-
     // Save text to a file
-    fs.writeFileSync(path.join(__dirname, "output.txt"), textContent);
-    console.log("Text content saved to output.txt");
+    // fs.writeFileSync(path.join(__dirname, "output.txt"), textContent);
+    // console.log("Text content saved to output.txt");
 
-    // Save images locally
     const images: string[] = [];
     for (const [index, imageUrl] of imageUrls.entries()) {
       const imageResponse = await axios({
@@ -82,12 +81,14 @@ const scrapeWebPage = async (
       // const imagePath = path.join(__dirname, `image_${index + 1}.jpg`);
       // const writer = fs.createWriteStream(imagePath);
       // imageResponse.data.pipe(writer);
-
-      // console.log(`Image saved: ${imagePath}`);
     }
 
     return {
-      textContent,
+      title,
+      textContent:
+        textContent.length > 2000
+          ? textContent.substring(0, 2000)
+          : textContent,
       coverImage,
       images,
     };

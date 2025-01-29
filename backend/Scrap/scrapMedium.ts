@@ -1,19 +1,12 @@
-import axios from "axios";
-import * as cheerio from "cheerio";
+import { REPHRASE_PROMPT } from "../constants";
 import { callAi } from "../Gemini/callAi";
-import scrapeWebPage from "./scrap";
 import { Medium } from "../Models/Medium";
+import scrapeWebPage from "./scrap";
 
 // Function to scrape webpage
-const scrapeMedium = async (url: string) => {
-  const freedium = "https://freedium.cfd/";
+export const scrapeMedium = async (url: string) => {
+  console.log("Scraping medium:", url);
   try {
-    // Fetch the HTML from the webpage
-    const { data: html } = await axios.get(url);
-
-    // Load HTML into cheerio
-    const $ = cheerio.load(html);
-
     // Remove unwanted elements by their class
     const excludedClasses = [
       "notification-container",
@@ -31,41 +24,29 @@ const scrapeMedium = async (url: string) => {
       "openProblemModal",
     ];
 
-    excludedClasses.forEach((className) => $(`.${className}`).remove());
-
-    // Remove unwanted elements by their IDs
-    excludedIds.forEach((id) => $(`#${id}`).remove());
-    // Find all <a> tags and extract the href attribute
-    const links: string[] = [];
-    $("div").each((index, element) => {
-      const href = $(element).attr("data-href");
-      if (href) {
-        if (href.includes("?")) {
-          links.push(freedium + href.split("?")[0]);
-        } else {
-          links.push(freedium + href);
-        }
-      }
-    });
-
-    for (const link of links) {
-      const response = await scrapeWebPage(link, excludedClasses, excludedIds);
-      if (!response) {
-        continue;
-      }
-      const aiResponse = await callAi(response.textContent);
-      if (!aiResponse || aiResponse === null) {
-        continue;
-      }
-      // save aiResponse to MongoDB in table "medium"
-      const medium = new Medium({
-        title: response.textContent.split("\n")[0],
-        content: aiResponse?.content,
-        images: response.images,
-      });
-      await medium.save();
-      console.log(aiResponse);
+    const response = await scrapeWebPage(url, excludedClasses, excludedIds);
+    if (!response) {
+      return;
     }
+    const aiResponse = await callAi(
+      REPHRASE_PROMPT,
+      response.title,
+      "application/json"
+    );
+    if (!aiResponse || aiResponse === null || aiResponse === "") {
+      return;
+    }
+    const aiRephrasedResponse = JSON.parse(aiResponse);
+    console.log("AI rephrased response:", aiRephrasedResponse?.title);
+    const medium = new Medium({
+      title: aiRephrasedResponse.title,
+      content: aiRephrasedResponse.content,
+      image: response.images[0],
+      createdAt: new Date(),
+    });
+    console.log("Medium:", medium);
+    const savedMedium = await medium.save();
+    console.log("Saved medium:", savedMedium);
 
     console.log("Scraping completed!");
   } catch (error) {
