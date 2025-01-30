@@ -8,6 +8,17 @@ export const getMethod = (app, path, response) => {
     // TODO: Call AI to get response with the data structure
     // TODO: Return response
     
+
+
+    app.get("/hello",(req,res)=>{
+      console.log("Welcome");
+});
+    app.get("/stublab",(req,res)=>{
+      console.log("hello");
+  
+});
+
+
 const prompt  = getResponseFromAI ("list",5, response);
 callAi(prompt).then(function (apiResponse) {
   const text = apiResponse.data?.candidates?.[0]?.content?.parts?.[0]?.text?.replaceAll('```json', '').replaceAll('```', '');

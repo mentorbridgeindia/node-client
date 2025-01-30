@@ -1,7 +1,6 @@
 import { type } from "os";
 import { callAi } from "../Gemini/callAi";
 import { getResponseFromAI } from "../utils/getResponseFromAI";
-import { count } from "console";
 
 export const deleteMethod = (app, path, response) => {
   app.delete(path, (req, res) => {

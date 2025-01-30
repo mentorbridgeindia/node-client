@@ -48,5 +48,13 @@ export const getRoutes = () => {
       method: "POST",
       response: { message: "User logged in successfully" },
     },
+    {
+      id: "7",
+      applicationPath: "/stuPro",
+      url: "/hello",
+      method: "GET",
+      response: { message: "Welcome"
+       },
+    },
   ];
 };

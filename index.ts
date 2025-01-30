@@ -6,6 +6,7 @@ import { setupUpdateRoute } from "./backend/Routes/addRoute";
 import { setupDefaultRoute } from "./backend/Routes/defaultRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
+import{apiFunc} from "./backend/Routes/api";
 import scrapeMedium from "./backend/Scrap/scrapMedium";
 
 app.use(bodyParser.json());
@@ -25,9 +26,13 @@ app.get("/", (req, res) => {
 setupDynamicRoutes(app);
 setupUpdateRoute(app);
 setupDefaultRoute(app);
+apiFunc(app);
 
 app.listen(4444, () => {
   console.log("Server is running on port 4444");
   // scrapeMedium("https://medium.com/tag/personal-development");
   cronJob();
 });
+
+
+
