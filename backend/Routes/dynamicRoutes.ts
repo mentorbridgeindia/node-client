@@ -4,26 +4,27 @@ import { getMethod } from "./getMethod";
 import { getRoutes } from "./getRoutes";
 import { postMethod } from "./postMethod";
 import { putMethod } from "./putMethod";
-import { Route } from "./route.types";
+import { IMockApiEntity } from "../Models/MockApi";
 
-export const setupDynamicRoutes = (app: Express) => {
-  getRoutes().forEach((route: Route) => {
-    const { applicationPath, url, method, response } = route;
+export const setupDynamicRoutes = async (app: Express) => {
+  const routes = await getRoutes();
+  routes.forEach((route: IMockApiEntity) => {
+    const { applicationPath, url, method } = route;
 
     const path = `${applicationPath}${url}`;
 
     switch (method) {
       case "GET":
-        getMethod(app, path, response);
+        getMethod(app, path, route);
         break;
       case "POST":
-        postMethod(app, path, response);
+        postMethod(app, path, route);
         break;
       case "PUT":
-        putMethod(app, path, response);
+        putMethod(app, path, route);
         break;
       case "DELETE":
-        deleteMethod(app, path, response);
+        deleteMethod(app, path, route);
         break;
       default:
         console.error(`Unsupported method: ${method}`);

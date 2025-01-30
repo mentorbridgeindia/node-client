@@ -2,14 +2,13 @@ const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
-import { setupUpdateRoute } from "./backend/Routes/addRoute";
-import { setupDefaultRoute } from "./backend/Routes/defaultRoute";
+import { setupAddRoute } from "./backend/Routes/addRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
-import connectMongoDB from "./backend/DbConnect/database";
-import scrapeMedium from "./backend/Scrap/scrapMedium";
-import { getMethod } from "./backend/Routes/getMethod";
-import {Model} from "./backend/Models/ApplicationModel";
+import { initiateScraping } from "./backend/Scrap/initiateScraping";
+import { Model } from "./backend/Models/ApplicationModel";
+import { switchDatabase } from "./backend/Database/switchDatabase";
+import { STUBLAB_DB } from "./backend/constants";
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
@@ -25,10 +24,9 @@ app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
-connectMongoDB();
-
 app.get("/models", async (req, res) => {
   try {
+    switchDatabase(STUBLAB_DB);
     const result = await Model.find();
     res.send(result);
   } catch (error) {
@@ -38,11 +36,12 @@ app.get("/models", async (req, res) => {
 );
 
 setupDynamicRoutes(app);
-setupUpdateRoute(app);
-setupDefaultRoute(app);
+setupAddRoute(app);
+// setupDefaultRoute(app);
 
 app.listen(4444, () => {
   console.log("Server is running on port 4444");
   // scrapeMedium("https://medium.com/tag/personal-development");
   cronJob();
+  // initiateScraping();
 });

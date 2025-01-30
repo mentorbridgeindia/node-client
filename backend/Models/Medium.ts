@@ -1,12 +1,24 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const mediumSchema = new mongoose.Schema(
+export interface IMedium extends Document {
+  title: string;
+  content: string;
+  image: string;
+  createdAt: Date;
+}
+
+const mediumSchema = new mongoose.Schema<IMedium>(
   {
-    title: String,
-    content: String,
-    images: [String],
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    image: { type: String },
+    createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );
 
-export const Medium = mongoose.model("medium", mediumSchema);
+export const Medium: Model<IMedium> = mongoose.model<IMedium>(
+  "Medium",
+  mediumSchema,
+  "medium"
+);

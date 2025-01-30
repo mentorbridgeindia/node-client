@@ -1,52 +1,12 @@
-export const getRoutes = () => {
-  // Fetch routes from Mongo DB
+import { STUBLAB_DB } from "../constants";
 
-  return [
-    {
-      id: "1",
-      applicationPath: "/stuPro",
-      url: "/hello",
-      method: "GET",
-      response: { message: "string",
-        "name":"string",
-        "type":"string"
-       },
-    },
-    {
-      id: "2",
-      applicationPath: "/stuPro",
-      url: "/user",
-      method: "POST",
-      response: { message: "string" },
-    },
-    {
-      id: "3",
-      applicationPath: "/stuPro",
-      url: "/user",
-      method: "GET",
-      response: { message: "User fetched successfully" },
-    },
-    {
-      id: "4",
-      applicationPath: "/stuPro",
-      url: "/user",
-      method: "PUT",
-      response: { message: "User updated successfully" },
-    },
-    {
-      id: "5",
-      applicationPath: "/stuPro",
-      url: "/user",
-      method: "DELETE",
-      response: { message: "User deleted successfully" },
-    },
-  
-    {
-      id: "6",
-      applicationPath: "/stuPro",
-      url: "/user/login",
-      method: "POST",
-      response: { message: "User logged in successfully" },
-    },
-  ];
+import { switchDatabase } from "../Database/switchDatabase";
+import { MockApi } from "../Models/MockApi";
+
+export const getRoutes = async () => {
+  switchDatabase(STUBLAB_DB);
+
+  const routes = await MockApi.find().lean();
+  console.log(routes);
+  return routes;
 };

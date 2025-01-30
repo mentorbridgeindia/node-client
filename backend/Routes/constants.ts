@@ -1,0 +1,1 @@
+export const GET_MOCK_RESPONSE_URL = "/fetch-mock-response";
