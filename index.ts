@@ -29,5 +29,5 @@ app.listen(4444, () => {
   console.log("Server is running on port 4444");
   // scrapeMedium("https://medium.com/tag/personal-development");
   cronJob();
-  initiateScraping();
+  // initiateScraping();
 });
