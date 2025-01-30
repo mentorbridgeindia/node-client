@@ -7,14 +7,17 @@ export const getRoutes = () => {
       applicationPath: "/stuPro",
       url: "/hello",
       method: "GET",
-      response: { message: "Hello World!" },
+      response: { message: "string",
+        "name":"string",
+        "type":"string"
+       },
     },
     {
       id: "2",
       applicationPath: "/stuPro",
       url: "/user",
       method: "POST",
-      response: { message: "User created successfully" },
+      response: { message: "string" },
     },
     {
       id: "3",
@@ -37,6 +40,7 @@ export const getRoutes = () => {
       method: "DELETE",
       response: { message: "User deleted successfully" },
     },
+  
     {
       id: "6",
       applicationPath: "/stuPro",

@@ -60,7 +60,7 @@ const scrapeMedium = async (url: string) => {
       // save aiResponse to MongoDB in table "medium"
       const medium = new Medium({
         title: response.textContent.split("\n")[0],
-        content: aiResponse?.content,
+        content: aiResponse?.data?.candidates?.[0]?.content?.parts?.[0]?.text,
         images: response.images,
       });
       await medium.save();
