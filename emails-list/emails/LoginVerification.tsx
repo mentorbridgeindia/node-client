@@ -64,9 +64,7 @@ import {
     </Html>
   );
   
-  // KoalaWelcomeEmail.PreviewProps = {
-  //   userFirstName: 'Alan',
-  // } as KoalaWelcomeEmailProps;
+ 
   
   export default KoalaWelcomeEmail;
   

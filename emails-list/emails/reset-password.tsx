@@ -74,10 +74,7 @@ export const ResetPasswordEmail = ({
   );
 };
 
-// ResetPasswordEmail.PreviewProps = {
-//   userFirstName: "John",
-//   verificationCode: "123456",
-// } as ResetPasswordEmailProps;
+
 
 export default ResetPasswordEmail;
 

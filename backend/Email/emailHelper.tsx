@@ -4,7 +4,7 @@ import PasswordChangedEmail from "../../client/Authentication/PasswordChangedEma
 import ResetEmail from "../../emails-list/emails/reset-password";
 import WelcomeEmail from "../../client/Authentication/WelcomeEmail";
 import RegisterEmail from "../../client/Authentication/RegisterEmail";
-// import GreetingEmail from "../../client/Authentication/greetingTemplate";
+
 import { EMAIL_TYPES } from "./constants";
 import { EMAIL_TYPE } from "./sendEmail.types";
 import { InviteUserEmail } from "../../emails-list/emails/invite-user";
@@ -35,17 +35,7 @@ export const getEmailContent = (type: EMAIL_TYPE, info: Record<string, any>): st
       emailComponent = <PasswordChangedEmail magicLink={info.magicLink} />;
       break;
 
-    // case EMAIL_TYPES.GREETING_EMAIL:
-    //   emailComponent = (
-    //     <GreetingEmail
-    //       recipientName={info.recipientName}
-    //       festivalName={info.festivalName}
-    //       greetingMessage={info.greetingMessage}
-    //       imageUrl={info.imageUrl}
-    //       footerText={info.footerText}
-    //     />
-    //   );
-    //   break;
+    
 
     case EMAIL_TYPES.LOGIN_VERIFICATION:
       emailComponent = <KoalaWelcomeEmail 

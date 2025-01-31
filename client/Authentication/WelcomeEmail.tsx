@@ -23,7 +23,7 @@ const baseUrl = process.env.VERCEL_URL
 
 export default function WelcomeEmail({
   userName = 'User',
-  // loginUrl = `${baseUrl}/login`,
+
 }: WelcomeEmailProps) {
   return (
     <Html>

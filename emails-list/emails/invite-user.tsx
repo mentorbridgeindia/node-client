@@ -58,7 +58,7 @@ export const InviteUserEmail = ({
                 {emails}
               </Link>   {""}
                 you are invited to the <strong>{organizationName}</strong> 
-              {/* <strong>SecuroSphere</strong>. */}
+              
             </Text>
            
             <Section className="text-center mt-[32px] mb-[32px]">
@@ -92,16 +92,6 @@ export const InviteUserEmail = ({
   );
 };
 
-// InviteUserEmail.PreviewProps = {
-//   username: "nive ",
-  
-//   invitedByUsername: " ",
-//   invitedByEmail: "alan.turing@example.com",
-//   teamName: "SecuroSphere",
-  
-//   inviteLink: "https://www.securosphere.in/",
-  
-  
-// } as InviteUserEmailProps;
+
 
 export default InviteUserEmail;

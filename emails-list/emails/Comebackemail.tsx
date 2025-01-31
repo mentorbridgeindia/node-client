@@ -15,7 +15,7 @@ import {
   
   interface WeMissYouEmailProps {
     userName?: string;
-    // lastLoginDate?: Date;
+   
   }
   
   const baseUrl = process.env.VERCEL_URL
@@ -24,7 +24,7 @@ import {
   
   export const WeMissYouEmail = ({
     userName,
-    // lastLoginDate,
+    
   }: WeMissYouEmailProps) => (
     <Html>
       <Head />
@@ -49,7 +49,7 @@ import {
             <Text style={paragraph}>
               Click below to log in and see what's new!
             </Text>
-            {/* Updated to use Link component from react-email */}
+            
             <Section style={buttonContainer}>
               <Link href="https://www.securosphere.in/login" style={button}>
                 Log in Now
@@ -128,9 +128,7 @@ import {
     width: '102px',
   };
   
-  // const link = {
-  //   textDecoration: 'underline',
-  // };
+  
   
   const buttonContainer = {
     textAlign: 'center',

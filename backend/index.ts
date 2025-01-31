@@ -4,9 +4,9 @@ import { setupEmailRoutes } from './Email/sendEmail';
 
 const app = express();
 
-// Parse application/json
+
 app.use(bodyParser.json());
-// Parse application/x-www-form-urlencoded
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 setupEmailRoutes(app);
