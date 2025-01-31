@@ -1,36 +1,80 @@
-import { renderToString } from 'react-dom/server';
+import { renderToString } from "react-dom/server";
+import React from "react";
 import PasswordChangedEmail from "../../client/Authentication/PasswordChangedEmail";
-import ResetEmail from "../../client/Authentication/ResetEmail";
+import ResetEmail from "../../emails-list/emails/reset-password";
 import WelcomeEmail from "../../client/Authentication/WelcomeEmail";
 import RegisterEmail from "../../client/Authentication/RegisterEmail";
+// import GreetingEmail from "../../client/Authentication/greetingTemplate";
 import { EMAIL_TYPES } from "./constants";
 import { EMAIL_TYPE } from "./sendEmail.types";
-import React from "react";
+import { InviteUserEmail } from "../../emails-list/emails/invite-user";
+import { KoalaWelcomeEmail } from "../../emails-list/emails/LoginVerification";
+import{ WeMissYouEmail} from "../../emails-list/emails/Comebackemail";
 
 export const getEmailContent = (type: EMAIL_TYPE, info: Record<string, any>): string => {
   let emailComponent;
-  
+
   switch (type) {
     case EMAIL_TYPES.REGISTER_EMAIL:
-      emailComponent = <RegisterEmail verificationCode={info.magicLink} />;
-
+      emailComponent = <RegisterEmail verificationCode={info.verificationCode} />;
       break;
-      case EMAIL_TYPES.RESET_PASSWORD:
-        emailComponent = <ResetEmail username={info.resetLink} />;
+
+    case EMAIL_TYPES.RESET_PASSWORD:
+      emailComponent = (
+      <ResetEmail userFirstName={info.userFirstName}
+      verificationCode={info.verificationCode}
+      verificationLink={info.verificationLink} />);
+      break;
+
+    case EMAIL_TYPES.WELCOME:
+      emailComponent = <WelcomeEmail userName={info.userName} 
+      loginUrl={info.loginUrl}/>;
+      break;
+
+    case EMAIL_TYPES.PASSWORD_CHANGED:
+      emailComponent = <PasswordChangedEmail magicLink={info.magicLink} />;
+      break;
+
+    // case EMAIL_TYPES.GREETING_EMAIL:
+    //   emailComponent = (
+    //     <GreetingEmail
+    //       recipientName={info.recipientName}
+    //       festivalName={info.festivalName}
+    //       greetingMessage={info.greetingMessage}
+    //       imageUrl={info.imageUrl}
+    //       footerText={info.footerText}
+    //     />
+    //   );
+    //   break;
+
+    case EMAIL_TYPES.LOGIN_VERIFICATION:
+      emailComponent = <KoalaWelcomeEmail 
+      
+      userFirstName={info.userFirstName}
+      urlLink={info.urlLink}  />;
+      break;
+
+      case EMAIL_TYPES.COMEBACK_EMAIL:
+        emailComponent =<WeMissYouEmail 
+        userName={info.userName} />;
         break;
-  
-      case EMAIL_TYPES.WELCOME:
-        emailComponent = <WelcomeEmail userFirstname={info.userFirstname} />;
-        break;
-  
-  case EMAIL_TYPES.PASSWORD_CHANGED:
-        emailComponent = <PasswordChangedEmail magicLink={info.magicLink} />;
-        break;
+
+
+    case EMAIL_TYPES.INVITE_USER:
+      emailComponent = (
+        <InviteUserEmail
+          applicationName={info.applicationName}
+          organizationName={info.organizationName}
+          emails={info.email}
+          subDomain={info.subDomain}
+        />
+      );
+      break;
+
     default:
       throw new Error(`Unsupported email type: ${type}`);
   }
 
-  
   return renderToString(emailComponent);
 };
 

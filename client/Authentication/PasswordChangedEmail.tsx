@@ -26,7 +26,7 @@ import {
   }: RaycastMagicLinkEmailProps) => (
     <Html>
       <Head />
-      <Preview>Log in with this magic link.</Preview>
+      <Preview >Log in with this magic link.</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -66,7 +66,7 @@ import {
               margin: "20px 0",
             }}
           />
-          <Text style={footer}>Mentor Bridge Inc.</Text>
+          <Text style={footer}>Mentor Bridge India</Text>
           <Text style={footer}>
             2093 Philadelphia Pike #3222, Claymont, DE 19703
           </Text>

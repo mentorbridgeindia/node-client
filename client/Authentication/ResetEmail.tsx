@@ -1,129 +1,114 @@
-import {
-    Body,
-    Button,
-    Container,
-    Head,
-    Html,
-    Img,
-    Link,
-    Preview,
-    Section,
-    Text,
-  } from "@react-email/components";
-  import * as React from "react";
+// import {
+//     Body,
+//     Button,
+//     Container,
+//     Head,
+//     Html,
+//     Img,
+//     Link,
+//     Preview,
+//     Section,
+//     Text,
+//   } from "@react-email/components";
+//   import * as React from "react";
   
-  interface GithubAccessTokenEmailProps {
-    username?: string;
-  }
+//   interface ResetPasswordEmailProps {
+//     userFirstName?: string;
+//     verificationCode?:string;
+//     // resetPasswordLink ?: string;
   
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "";
+//   }
   
-  export const GithubAccessTokenEmail = ({
-    username,
-  }: GithubAccessTokenEmailProps) => (
-    <Html>
-      <Head />
-      <Preview>
-        A fine-grained personal access token has been added to your mail account
-      </Preview>
-      <Body style={main}>
-        <Container style={container}>
-          <Img
-            src={`${baseUrl}/static/github.png`}
-            width="32"
-            height="32"
-            alt="Github"
-          />
+//   const baseUrl = process.env.VERCEL_URL
+//     ? `https://${process.env.VERCEL_URL}`
+//     : "";
   
-          <Text style={title}>
-            <strong>@{username}</strong>, a personal access was created on your
-            account.
-          </Text>
+//   export const ResetPasswordEmail = ({
+//     userFirstName,
+//     verificationCode,
+//     // resetPasswordLink,
+//   }: ResetPasswordEmailProps) => {
+//     return (
+//       <Html>
+//         <Head />
+//         <Preview> Reset your password with a verification code</Preview>
+//         <Body style={main}>
+//           <Container style={container}>
+//             <Img
+//               src={`${baseUrl}/static/dropbox-logo.png`}
+//               width="40"
+//               height="33"
+//               alt="Dropbox"
+//             />
+//             <Section>
+//               <Text style={text}>Hi {userFirstName},</Text>
+//               <Text style={text}>
+//               We received a request to reset the password for your SecuroSphere
+//               account
+//               </Text>
+//               {/* <Text style={code}>{verificationCode}</Text> */}
+
+//               <Button style={button} href="https://www.securosphere.in/reset-password">
+//                 Reset password
+//               </Button>
+//               <Text style={text}>
+//                 If you don&apos;t want to change your password or didn&apos;t
+//                 request this, just ignore and delete this message.
+//               </Text>
+//               <Text style={text}>
+//                 To keep your account secure, please don&apos;t forward this email
+//                 to anyone.
+//               </Text>
+           
+//             </Section>
+//           </Container>
+//         </Body>
+//       </Html>
+//     );
+//   };
   
-          <Section style={section}>
-            <Text style={text}>
-              Hey <strong>{username}</strong>!
-            </Text>
-            <Text style={text}>
-              A fine-grained personal access token (<Link>resend</Link>) was
-              recently added to your account.
-            </Text>
+//   // ResetPasswordEmail.PreviewProps = {
+//   //   userFirstName: "nivethitha",
+//   //   resetPasswordLink: "https://www.securosphere.in/reset-password",
+//   // } as ResetPasswordEmailProps;
   
-            <Button style={button}>View your token</Button>
-          </Section>
-          <Text style={links}>
-            <Link style={link}>Your security audit log</Link> ・{" "}
-            <Link style={link}>Contact support</Link>
-          </Text>
+//   export default ResetPasswordEmail;
   
-          <Text style={footer}>
-            GitHub, Inc. ・88 Colin P Kelly Jr Street ・San Francisco, CA 94107
-          </Text>
-        </Container>
-      </Body>
-    </Html>
-  );
+//   const main = {
+//     backgroundColor: "#f6f9fc",
+//     padding: "10px 0",
+//   };
   
-  GithubAccessTokenEmail.PreviewProps = {
-    username: "alanturing",
-  } as GithubAccessTokenEmailProps;
+//   const container = {
+//     backgroundColor: "#ffffff",
+//     border: "1px solid #f0f0f0",
+//     padding: "45px",
+//   };
   
-  export default GithubAccessTokenEmail;
+//   const text = {
+//     fontSize: "16px",
+//     fontFamily:
+//       "'Open Sans', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif",
+//     fontWeight: "300",
+//     color: "#404040",
+//     lineHeight: "26px",
+//   };
   
-  const main = {
-    backgroundColor: "#ffffff",
-    color: "#24292e",
-    fontFamily:
-      '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
-  };
+//   const button = {
+//     backgroundColor: "#007ee6",
+//     borderRadius: "4px",
+//     color: "#fff",
+//     fontFamily: "'Open Sans', 'Helvetica Neue', Arial",
+//     fontSize: "15px",
+//     textDecoration: "none",
+//     textAlign: "center" as const,
+//     display: "block",
+//     width: "210px",
+//     padding: "14px 7px",
+//   };
   
-  const container = {
-    maxWidth: "480px",
-    margin: "0 auto",
-    padding: "20px 0 48px",
-  };
+//   const anchor = {
+//     textDecoration: "underline",
+//   };
   
-  const title = {
-    fontSize: "24px",
-    lineHeight: 1.25,
-  };
-  
-  const section = {
-    padding: "24px",
-    border: "solid 1px #dedede",
-    borderRadius: "5px",
-    textAlign: "center" as const,
-  };
-  
-  const text = {
-    margin: "0 0 10px 0",
-    textAlign: "left" as const,
-  };
-  
-  const button = {
-    fontSize: "14px",
-    backgroundColor: "#28a745",
-    color: "#fff",
-    lineHeight: 1.5,
-    borderRadius: "0.5em",
-    padding: "12px 24px",
-  };
-  
-  const links = {
-    textAlign: "center" as const,
-  };
-  
-  const link = {
-    color: "#0366d6",
-    fontSize: "12px",
-  };
-  
-  const footer = {
-    color: "#6a737d",
-    fontSize: "12px",
-    textAlign: "center" as const,
-    marginTop: "60px",
-  };
-  
+

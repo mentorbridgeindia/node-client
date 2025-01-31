@@ -1,152 +1,146 @@
 import {
   Body,
-  Button,
   Container,
   Head,
-  Hr,
+  Heading,
   Html,
-  Img,
   Link,
   Preview,
   Section,
   Text,
-} from "@react-email/components";
-import * as React from "react";
+  Button,
+} from '@react-email/components';
+import * as React from 'react';
+
+interface WelcomeEmailProps {
+  userName?: string;
+  loginUrl?: string;
+}
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "";
+  : '';
 
-export const StripeWelcomeEmail = () => (
-  <Html>
-    <Head />
-    <Preview>You're now ready to make live transactions with Stripe!</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Section style={box}>
-          <Img
-            src={`${baseUrl}/static/stripe-logo.png`}
-            width="49"
-            height="21"
-            alt="Stripe"
-          />
-          <Hr style={hr} />
-          <Text style={paragraph}>
-            Thanks for submitting your account information. You're now ready to
-            make live transactions with Stripe!
-          </Text>
-          <Text style={paragraph}>
-            You can view your payments and a variety of other information about
-            your account right from your dashboard.
-          </Text>
-          <Button style={button} href="https://dashboard.stripe.com/login">
-            View your Stripe Dashboard
-          </Button>
-          <Hr style={hr} />
-          <Text style={paragraph}>
-            If you haven't finished your integration, you might find our{" "}
-            <Link style={anchor} href="https://stripe.com/docs">
-              docs
-            </Link>{" "}
-            handy.
-          </Text>
-          <Text style={paragraph}>
-            Once you're ready to start accepting payments, you'll just need to
-            use your live{" "}
-            <Link
-              style={anchor}
-              href="https://dashboard.stripe.com/login?redirect=%2Fapikeys"
+export default function WelcomeEmail({
+  userName,
+  loginUrl,
+  // loginUrl = `${baseUrl}/login`,
+}: WelcomeEmailProps) {
+  return (
+    <Html>
+      <Head />7
+      <Preview>Welcome to SecuroSphere! </Preview>
+      <Body style={mainStyle}>
+        <Container style={containerStyle}>
+          <Section style={headerStyle}>
+            <Heading style={headingStyle}>Welcome to SecuroSphere</Heading>
+          </Section>
+
+          <Section style={bodyStyle}>
+            <Text style={textStyle}>
+              Hi <strong>{userName}</strong>,
+            </Text>
+            <Text style={textStyle}>
+              Thank you for registering with us. We're excited to have you on board! Get started by exploring your account and discovering everything we have to offer.
+            </Text>
+            <Button
+              href={loginUrl }
+              style={buttonStyle}
             >
-              API keys
-            </Link>{" "}
-            instead of your test API keys. Your account can simultaneously be
-            used for both test and live requests, so you can continue testing
-            while accepting live payments. Check out our{" "}
-            <Link style={anchor} href="https://stripe.com/docs/dashboard">
-              tutorial about account basics
-            </Link>
-            
-          </Text>
-          <Text style={paragraph}>
-            Finally, we've put together a{" "}
-            <Link
-              style={anchor}
-              href="https://stripe.com/docs/checklist/website"
-            >
-              quick checklist
-            </Link>{" "}
-            to ensure your website conforms to card network standards.
-          </Text>
-          <Text style={paragraph}>
-            We'll be here to help you with any step along the way. You can find
-            answers to most questions and get in touch with us on our{" "}
-            <Link style={anchor} href="https://support.stripe.com/">
-              support site
-            </Link>
-            
-          </Text>
-          <Text style={paragraph}>— The Stripe team</Text>
-          <Hr style={hr} />
-          <Text style={footer}>
-            Stripe, 354 Oyster Point Bld, South San Francisco, CA 94080
-          </Text>
-        </Section>
-      </Container>
-    </Body>
-  </Html>
-);
+              Log in to Your Account
+            </Button>
+            <Text style={textStyle}>
+              If you have any questions, feel free to reach out to our support team.
+            </Text>
+          </Section>
 
-export default StripeWelcomeEmail;
+          <Section style={footerStyle}>
+            <Text style={footerTextStyle}>
+              Best regards, <br />
+              The SecuroSphere Team
+            </Text>
+            <Text style={footerTextStyle}>
+              Need help? Visit our{' '}
+              <Link href="/support" style={linkStyle}>
+                Support Center
+              </Link>{' '}
+              or email us at{' '}
+              <Link href="mailto:support@yourcompany.com" style={linkStyle}>
+                support@securospere.com
+              </Link>
+              .
+            </Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
+  );
+}
 
-const main = {
-  backgroundColor: "#f6f9fc",
-  fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+const mainStyle = {
+  backgroundColor: '#f9f9f9',
+  color: '#333',
+  fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  padding: '20px',
 };
 
-const container = {
-  backgroundColor: "#ffffff",
-  margin: "0 auto",
-  padding: "20px 0 48px",
-  marginBottom: "64px",
+const containerStyle = {
+  maxWidth: '600px',
+  margin: '0 auto',
+  backgroundColor: '#ffffff',
+  borderRadius: '8px',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  overflow: 'hidden',
 };
 
-const box = {
-  padding: "0 48px",
+const headerStyle = {
+  backgroundColor: '#007ee6',
+  color: '#ffffff',
+  textAlign: 'center' as const,
+  padding: '20px',
 };
 
-const hr = {
-  borderColor: "#e6ebf1",
-  margin: "20px 0",
+const headingStyle = {
+  fontSize: '24px',
+  fontWeight: 'bold',
+  margin: 0,
 };
 
-const paragraph = {
-  color: "#525f7f",
-
-  fontSize: "16px",
-  lineHeight: "24px",
-  textAlign: "left" as const,
+const bodyStyle = {
+  padding: '20px',
 };
 
-const anchor = {
-  color: "#556cd6",
+const textStyle = {
+  fontSize: '16px',
+  lineHeight: '1.5',
+  marginBottom: '20px',
 };
 
-const button = {
-  backgroundColor: "#656ee8",
-  borderRadius: "5px",
-  color: "#fff",
-  fontSize: "16px",
-  fontWeight: "bold",
-  textDecoration: "none",
-  textAlign: "center" as const,
-  display: "block",
-  width: "100%",
-  padding: "10px",
+const buttonStyle = {
+  display: 'inline-block',
+  backgroundColor: '#007ee6',
+  color: '#ffffff',
+  padding: '10px 20px',
+  borderRadius: '5px',
+  textDecoration: 'none',
+  fontWeight: 'bold',
+  textAlign: 'center' as const,
 };
 
-const footer = {
-  color: "#8898aa",
-  fontSize: "12px",
-  lineHeight: "16px",
+const footerStyle = {
+  backgroundColor: '#f1f1f1',
+  padding: '20px',
+  textAlign: 'center' as const,
+};
+
+const footerTextStyle = {
+  fontSize: '14px',
+  color: '#666',
+  lineHeight: '1.5',
+  marginBottom: '10px',
+};
+
+const linkStyle = {
+  color: '#007ee6',
+  textDecoration: 'underline',
 };
