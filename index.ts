@@ -2,31 +2,13 @@ const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
-
+import { setupAddRoute } from "./backend/Routes/addRoute";
+import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
+import { cronJob } from "./backend/Scrap/cronJob";
+import { initiateScraping } from "./backend/Scrap/initiateScraping";
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
-
-app.get("/getCountries", function (req, res) {
-  res.send([
-    {
-      id: 1,
-      name: "India", // get from OPEN AI API
-    },
-    {
-      id: 2,
-      name: "USA",
-    },
-    {
-      id: 3,
-      name: "Argentina",
-    },
-  ]);
-});
-
-app.post("/create-user", function (req, res) {
-  res.send("Hello world!");
-});
 
 app.use(express.json());
 
@@ -39,6 +21,13 @@ app.get("/", (req, res) => {
   res.send("Hello nodejs !");
 });
 
+setupDynamicRoutes(app);
+setupAddRoute(app);
+// setupDefaultRoute(app);
 
-
-app.listen(3001);
+app.listen(4444, () => {
+  console.log("Server is running on port 4444");
+  // scrapeMedium("https://medium.com/tag/personal-development");
+  cronJob();
+  // initiateScraping();
+});

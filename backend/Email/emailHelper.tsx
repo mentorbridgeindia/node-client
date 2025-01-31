@@ -11,7 +11,10 @@ import { InviteUserEmail } from "../../emails-list/emails/invite-user";
 import { LoginVerifyEmail } from "../../emails-list/emails/LoginVerification";
 import{ WeMissYouEmail} from "../../emails-list/emails/Comebackemail";
 
-export const getEmailContent = (type: EMAIL_TYPE, info: Record<string, any>): string => {
+export const getEmailContent = (
+  type: EMAIL_TYPE,
+  info: Record<string, any>
+): string => {
   let emailComponent;
 
   switch (type) {
