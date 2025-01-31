@@ -15,6 +15,8 @@ import * as React from 'react';
 interface WelcomeEmailProps {
   userName?: string;
   loginUrl?: string;
+  organization?:string;
+  rawUrl?:string;
 }
 
 const baseUrl = process.env.VERCEL_URL
@@ -24,7 +26,8 @@ const baseUrl = process.env.VERCEL_URL
 export default function WelcomeEmail({
   userName,
   loginUrl,
-  
+organization,
+rawUrl,
 }: WelcomeEmailProps) {
   return (
     <Html>
@@ -33,18 +36,18 @@ export default function WelcomeEmail({
       <Body style={mainStyle}>
         <Container style={containerStyle}>
           <Section style={headerStyle}>
-            <Heading style={headingStyle}>Welcome to SecuroSphere</Heading>
+            <Heading style={headingStyle}>Welcome to  {organization}</Heading>
           </Section>
 
           <Section style={bodyStyle}>
             <Text style={textStyle}>
-              Hi <strong>{userName}</strong>,
+            Hi <strong>{userName}</strong>,
             </Text>
             <Text style={textStyle}>
               Thank you for registering with us. We're excited to have you on board! Get started by exploring your account and discovering everything we have to offer.
             </Text>
             <Button
-              href={loginUrl }
+              href={loginUrl}
               style={buttonStyle}
             >
               Log in to Your Account
@@ -57,18 +60,18 @@ export default function WelcomeEmail({
           <Section style={footerStyle}>
             <Text style={footerTextStyle}>
               Best regards, <br />
-              The SecuroSphere Team
+              The {organization} Team
             </Text>
             <Text style={footerTextStyle}>
               Need help? Visit our{' '}
               <Link href="/support" style={linkStyle}>
                 Support Center
-              </Link>{' '}
-              or email us at{' '}
+              </Link>{rawUrl}
+                  or email us at{' '}
               <Link href="mailto:support@yourcompany.com" style={linkStyle}>
-                support@securospere.com
+               {rawUrl}
               </Link>
-              .
+              
             </Text>
           </Section>
         </Container>

@@ -18,8 +18,8 @@ interface InviteUserEmailProps {
   applicationName?:string;
   organizationName?: string;
   emails?:string;
-  subDomain?:string;
   urlLink?:string;
+  rawUrl?:string;
 }
 
 const baseUrl = process.env.VERCEL_URL
@@ -29,9 +29,9 @@ const baseUrl = process.env.VERCEL_URL
 export const InviteUserEmail = ({
   organizationName,
   emails,
-  subDomain,
-  applicationName,
   urlLink,
+  applicationName,
+  rawUrl,
 }: InviteUserEmailProps) => {
   const previewText = `Join {VercelInviteUserEmail.applicantName} on Vercel`;
 
@@ -64,17 +64,18 @@ export const InviteUserEmail = ({
             <Section className="text-center mt-[32px] mb-[32px]">
               <Button
                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
-                href= "https://www.securosphere.in/"
+                href= {urlLink}
               >
                 Join the team
               </Button>
             </Section>
             <Text className="text-black text-[14px] leading-[24px]">
   or copy and paste this URL into your browser:{" "}
-  <a href="https://www.securosphere.in/login" className="text-blue-600 no-underline">
-    https://www.securosphere.in/login
+  <a href={rawUrl} className="text-blue-600 no-underline">
+    {rawUrl}
   </a>
 </Text>
+
 
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
             <Text className="text-[#666666] text-[12px] leading-[24px]">

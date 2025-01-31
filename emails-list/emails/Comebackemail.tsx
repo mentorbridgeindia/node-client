@@ -15,7 +15,8 @@ import {
   
   interface WeMissYouEmailProps {
     userName?: string;
-   
+   userLink?:string;
+   organization?:string;
   }
   
   const baseUrl = process.env.VERCEL_URL
@@ -24,7 +25,8 @@ import {
   
   export const WeMissYouEmail = ({
     userName,
-    
+    userLink,
+    organization,
   }: WeMissYouEmailProps) => (
     <Html>
       <Head />
@@ -51,7 +53,7 @@ import {
             </Text>
             
             <Section style={buttonContainer}>
-              <Link href="https://www.securosphere.in/login" style={button}>
+              <Link href={userLink } style={button}>
                 Log in Now
               </Link>
             </Section>
@@ -60,7 +62,7 @@ import {
             </Text>
             <Text style={paragraph}>
               See you soon!<br />
-              The Team SecuroSphere.
+              The Team {organization}
             </Text>
           </Section>
         </Container>
