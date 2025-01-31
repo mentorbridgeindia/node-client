@@ -28,7 +28,7 @@ export default function WelcomeEmail({
 }: WelcomeEmailProps) {
   return (
     <Html>
-      <Head />7
+      <Head />
       <Preview>Welcome to SecuroSphere! </Preview>
       <Body style={mainStyle}>
         <Container style={containerStyle}>
@@ -94,8 +94,8 @@ const containerStyle = {
 };
 
 const headerStyle = {
-  backgroundColor: '#007ee6',
-  color: '#ffffff',
+  
+  color: 'black',
   textAlign: 'center' as const,
   padding: '20px',
 };
