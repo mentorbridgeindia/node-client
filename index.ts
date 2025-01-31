@@ -18,7 +18,7 @@ app.use(express.static("client/public"));
 
 app.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "client/public/index.html"));
-  res.send("Hello world!");
+  res.send("Hello nodejs !");
 });
 
 setupDynamicRoutes(app);

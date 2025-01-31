@@ -1,4 +1,4 @@
-export type EMAIL_TYPE = "register" | "reset";
+export type EMAIL_TYPE = "register_user" | "reset_password" | "invite_user" |"welcome" |"login_verification" |"comeback_email" ;
 
 export interface EmailRequestBody {
   from: string;

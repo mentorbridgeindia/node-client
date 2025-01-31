@@ -13,21 +13,29 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface AWSVerifyEmailProps {
+interface VerifyEmailProps {
   verificationCode?: string;
+  organization?:string;
+  urlLink?:string;
+  
+policyUrl?:string;
 }
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export default function AWSVerifyEmail({
-  verificationCode = "596853",
-}: AWSVerifyEmailProps) {
+export default function VerifyEmail({
+  verificationCode,
+  organization,
+  urlLink,
+  
+  policyUrl,
+}: VerifyEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>AWS Email Verification</Preview>
+      <Preview> SecuroSphere Email Verification</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={coverSection}>
@@ -42,7 +50,7 @@ export default function AWSVerifyEmail({
             <Section style={upperSection}>
               <Heading style={h1}>Verify your email address</Heading>
               <Text style={mainText}>
-                Thanks for starting the new AWS account creation process. We
+                Thanks for starting the new {organization} account creation process. We
                 want to make sure it's really you. Please enter the following
                 verification code when prompted. If you don&apos;t want to
                 create an account, you can ignore this message.
@@ -50,7 +58,8 @@ export default function AWSVerifyEmail({
               <Section style={verificationSection}>
                 <Text style={verifyText}>Verification code</Text>
 
-                <Text style={codeText}>{verificationCode}</Text>
+                <Text style={codeText}>
+                  {verificationCode}</Text>
                 <Text style={validityText}>
                   (This code is valid for 10 minutes)
                 </Text>
@@ -59,24 +68,23 @@ export default function AWSVerifyEmail({
             <Hr />
             <Section style={lowerSection}>
               <Text style={cautionText}>
-                Amazon Web Services will never email you and ask you to disclose
+               {organization} will never email you and ask you to disclose
                 or verify your password, credit card, or banking account number.
               </Text>
             </Section>
           </Section>
           <Text style={footerText}>
-            This message was produced and distributed by Amazon Web Services,
-            Inc., 410 Terry Ave. North, Seattle, WA 98109. © 2022, Amazon Web
-            Services, Inc.. All rights reserved. AWS is a registered trademark
+            This message was produced and distributed by 
+     MentorBridge India. All rights reserved 
             of{" "}
-            <Link href="https://amazon.com" target="_blank" style={link}>
-              Amazon.com
+            <Link href={urlLink} target="_blank" style={link}>
+              {urlLink}
             </Link>
             , Inc. View our{" "}
-            <Link href="https://amazon.com" target="_blank" style={link}>
+            <Link href={policyUrl} target="_blank" style={link}>
               privacy policy
             </Link>
-            .
+            
           </Text>
         </Container>
       </Body>
