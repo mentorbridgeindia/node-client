@@ -8,7 +8,7 @@ import RegisterEmail from "../../client/Authentication/RegisterEmail";
 import { EMAIL_TYPES } from "./constants";
 import { EMAIL_TYPE } from "./sendEmail.types";
 import { InviteUserEmail } from "../../emails-list/emails/invite-user";
-import { KoalaWelcomeEmail } from "../../emails-list/emails/LoginVerification";
+import { LoginVerifyEmail } from "../../emails-list/emails/LoginVerification";
 import{ WeMissYouEmail} from "../../emails-list/emails/Comebackemail";
 
 export const getEmailContent = (type: EMAIL_TYPE, info: Record<string, any>): string => {
@@ -16,37 +16,45 @@ export const getEmailContent = (type: EMAIL_TYPE, info: Record<string, any>): st
 
   switch (type) {
     case EMAIL_TYPES.REGISTER_EMAIL:
-      emailComponent = <RegisterEmail verificationCode={info.verificationCode} />;
+      emailComponent = <RegisterEmail verificationCode={info.verificationCode}
+      organization={info.organization}
+      policyUrl={info.policyUrl}
+      urlLink={info.urlLink}
+       />;
       break;
 
     case EMAIL_TYPES.RESET_PASSWORD:
       emailComponent = (
       <ResetEmail userFirstName={info.userFirstName}
       verificationCode={info.verificationCode}
-      verificationLink={info.verificationLink} />);
+      verificationLink={info.verificationLink} 
+      organization ={info.organization}/>);
       break;
 
     case EMAIL_TYPES.WELCOME:
       emailComponent = <WelcomeEmail userName={info.userName} 
-      loginUrl={info.loginUrl}/>;
+      loginUrl={info.loginUrl}
+      organization={info.organization}
+      rawUrl={info.rawUrl}/>;
       break;
 
     case EMAIL_TYPES.PASSWORD_CHANGED:
-      emailComponent = <PasswordChangedEmail magicLink={info.magicLink} />;
+      emailComponent = <PasswordChangedEmail urlLink={info.urlLink} />;
       break;
 
-    
-
+  
     case EMAIL_TYPES.LOGIN_VERIFICATION:
-      emailComponent = <KoalaWelcomeEmail 
-      
+      emailComponent = <LoginVerifyEmail 
+      organization={info.organization}
       userFirstName={info.userFirstName}
       urlLink={info.urlLink}  />;
       break;
 
       case EMAIL_TYPES.COMEBACK_EMAIL:
         emailComponent =<WeMissYouEmail 
-        userName={info.userName} />;
+        userName={info.userName}
+        userLink={info.userLink}
+        organization={info.organization} />;
         break;
 
 
@@ -56,7 +64,8 @@ export const getEmailContent = (type: EMAIL_TYPE, info: Record<string, any>): st
           applicationName={info.applicationName}
           organizationName={info.organizationName}
           emails={info.email}
-          subDomain={info.subDomain}
+          rawUrl={info.rawUrl}
+          urlLink={info.urlLink}
         />
       );
       break;

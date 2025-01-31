@@ -13,20 +13,22 @@ import {
   } from "@react-email/components";
   import * as React from "react";
   
-  interface RaycastMagicLinkEmailProps {
-    magicLink?: string;
+  interface PasswordLinkEmailProps {
+    urlLink?: string;
+    organization?:string;
   }
   
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "";
   
-  export const RaycastMagicLinkEmail = ({
-    magicLink,
-  }: RaycastMagicLinkEmailProps) => (
+  export const PasswordLinkEmail = ({
+    urlLink,
+    organization,
+  }: PasswordLinkEmailProps) => (
     <Html>
       <Head />
-      <Preview >Log in with this magic link.</Preview>
+      <Preview >PasswordChanged Email</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -35,15 +37,15 @@ import {
             height={48}
             alt="Raycast"
           />
-          <Heading style={heading}>🪄 Stub lab verification </Heading>
+          <Heading style={heading}>🪄 {organization} verification </Heading>
           <Section style={body}>
             <Text style={paragraph}>
-              <Link style={link} href={magicLink}>
-                👉 click here to stub lab ...👈
+              <Link style={link} href={urlLink}>
+                👉 click here to s{organization} ...👈
               </Link>
             </Text>
             <Text style={paragraph}>
-              Stay connected with Stub lab.... 
+              Stay connected with {organization}.... 
             </Text>
             
             <Text style={paragraph}>
@@ -53,7 +55,7 @@ import {
           </Section>
           <Text style={paragraph}>
             Best,
-            <br />- Stub lab Team
+            <br />- {organization} Team
           </Text>
           <Hr style={hr} />
           <Img
@@ -75,11 +77,11 @@ import {
     </Html>
   );
   
-  RaycastMagicLinkEmail.PreviewProps = {
+  PasswordLinkEmail.PreviewProps = {
     magicLink: "https://raycast.com",
-  } as RaycastMagicLinkEmailProps;
+  } as PasswordLinkEmailProps;
   
-  export default RaycastMagicLinkEmail;
+  export default PasswordLinkEmail;
   
   const main = {
     backgroundColor: "#ffffff",

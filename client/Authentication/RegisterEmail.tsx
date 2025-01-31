@@ -13,17 +13,25 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface AWSVerifyEmailProps {
+interface VerifyEmailProps {
   verificationCode?: string;
+  organization?:string;
+  urlLink?:string;
+  
+policyUrl?:string;
 }
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export default function AWSVerifyEmail({
+export default function VerifyEmail({
   verificationCode,
-}: AWSVerifyEmailProps) {
+  organization,
+  urlLink,
+  
+  policyUrl,
+}: VerifyEmailProps) {
   return (
     <Html>
       <Head />
@@ -42,7 +50,7 @@ export default function AWSVerifyEmail({
             <Section style={upperSection}>
               <Heading style={h1}>Verify your email address</Heading>
               <Text style={mainText}>
-                Thanks for starting the new SecuroSphere account creation process. We
+                Thanks for starting the new {organization} account creation process. We
                 want to make sure it's really you. Please enter the following
                 verification code when prompted. If you don&apos;t want to
                 create an account, you can ignore this message.
@@ -60,7 +68,7 @@ export default function AWSVerifyEmail({
             <Hr />
             <Section style={lowerSection}>
               <Text style={cautionText}>
-               Securosphere will never email you and ask you to disclose
+               {organization} will never email you and ask you to disclose
                 or verify your password, credit card, or banking account number.
               </Text>
             </Section>
@@ -69,11 +77,11 @@ export default function AWSVerifyEmail({
             This message was produced and distributed by 
      MentorBridge India. All rights reserved 
             of{" "}
-            <Link href="https://securosphere.com" target="_blank" style={link}>
-              SecuroSphere
+            <Link href={urlLink} target="_blank" style={link}>
+              {urlLink}
             </Link>
             , Inc. View our{" "}
-            <Link href="https://securosphere.com" target="_blank" style={link}>
+            <Link href={policyUrl} target="_blank" style={link}>
               privacy policy
             </Link>
             

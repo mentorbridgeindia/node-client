@@ -12,19 +12,21 @@ import {
   } from '@react-email/components';
   import * as React from 'react';
   
-  interface KoalaWelcomeEmailProps {
+  interface VerifyEmailProps {
     userFirstName: string;
     urlLink:string;
+    organization:string;
   }
   
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : '';
   
-  export const KoalaWelcomeEmail = ({
+  export const LoginVerifyEmail = ({
     userFirstName,
     urlLink,
-  }: KoalaWelcomeEmailProps) => (
+    organization,
+  }: VerifyEmailProps) => (
     <Html>
       <Head/>
       <Preview>
@@ -40,7 +42,7 @@ import {
           />
           <Text style={paragraph}>Hi {userFirstName},</Text>
           <Text style={paragraph}>
-  Welcome to <b>SecuroSphere</b>, thanks for log in with us! Stay continued..&nbsp;  
+  Welcome to <b>{ organization}</b>, thanks for log in with us! Stay continued..&nbsp;  
   If this was you, no action is needed. If not, please reset your password immediately.
   <br /><br />
   Stay secured.
@@ -53,7 +55,7 @@ import {
           <Text style={paragraph}>
             Best,
             <br />
-            The SecuroSphere team
+            The {organization} team
           </Text>
           <Hr style={hr} />
           <Text style={footer}>
@@ -66,7 +68,7 @@ import {
   
  
   
-  export default KoalaWelcomeEmail;
+  export default LoginVerifyEmail;
   
   const main = {
     backgroundColor: '#ffffff',

@@ -15,6 +15,7 @@ interface ResetPasswordEmailProps {
   userFirstName?: string;
   verificationCode?: string;
   verificationLink?:string;
+  organization?:string;
 }
 
 const baseUrl = process.env.VERCEL_URL
@@ -25,6 +26,7 @@ export const ResetPasswordEmail = ({
   userFirstName ,
   verificationCode,
   verificationLink,
+  organization,
 }: ResetPasswordEmailProps) => {
   return (
     <Html>
@@ -41,7 +43,7 @@ export const ResetPasswordEmail = ({
           <Section>
             <Text style={text}>Hi {userFirstName},</Text>
             <Text style={text}>
-              Someone recently requested a password change for your SecuroSphere
+              Someone recently requested a password change for your {organization}
               Account.
             </Text>
 
@@ -56,8 +58,7 @@ export const ResetPasswordEmail = ({
               <Text style={validityText}>(This code is valid for 10 minutes)</Text>
             </Section>
 
-            
-            <Button style={button} href={verificationLink}>
+          <Button style={button} href={verificationLink}>
               Reset Password
             </Button>
 
