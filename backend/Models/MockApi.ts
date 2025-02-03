@@ -28,5 +28,5 @@ const mockApiSchema = new mongoose.Schema<IMockApiEntity>(
 export const MockApi: Model<IMockApiEntity> = mongoose.model<IMockApiEntity>(
   "MockApi",
   mockApiSchema,
-  "MockApi"
+  "MockAPI"
 );

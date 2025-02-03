@@ -6,6 +6,7 @@ import { setupAddRoute } from "./backend/Routes/addRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
 import { initiateScraping } from "./backend/Scrap/initiateScraping";
+import { Request, Response, NextFunction } from "express";
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
@@ -15,6 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("client/public"));
+
+const middleware = (req: Request, res: Response, next: NextFunction) => {
+  console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
+  next();
+};
+
+app.use(middleware);
 
 app.get("/", (req, res) => {
   // res.sendFile(path.join(__dirname, "client/public/index.html"));

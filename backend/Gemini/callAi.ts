@@ -29,7 +29,7 @@ export const callAi = async (
     ],
     generationConfig,
   };
-  console.log("Generating AI response", requestBody);
+  console.log("Generating AI response", requestBody.contents[0].parts[0].text);
   try {
     const response = await axios.post(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAyhAfOqUr0dQy9DTbPPALKMoA7KGkw55M",
