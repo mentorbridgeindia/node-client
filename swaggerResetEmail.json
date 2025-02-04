@@ -1,0 +1,100 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Emails API - Reset Password",
+      "version": "1.0.0",
+      "description": "API for sending reset password emails"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4444"
+      }
+    ],
+    "paths": {
+      "/send-reset-password": {
+        "post": {
+          "summary": "Send Reset Password Email",
+          "tags": ["SendEmail"],
+          "description": "Sends an email with a verification code to reset the user's password.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "type": "string",
+                      "example": "nivethitha029@gmail.com"
+                    },
+                    "from": {
+                      "type": "string",
+                      "example": "Utsavppt@gmail.com"
+                    },
+                    "subject": {
+                      "type": "string",
+                      "example": "Reset-password"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "reset_password"
+                    },
+                    "userFirstName": {
+                      "type": "string",
+                      "example": "John"
+                    },
+                    "verificationCode": {
+                      "type": "string",
+                      "example": "12345"
+                    },
+                    "verificationLink": {
+                      "type": "string",
+                      "example": "https://example.com/reset-password?code=12345"
+                    },
+                    "organization": {
+                      "type": "string",
+                      "example": "SecuroSphere"
+                    }
+                  },
+                  "required": ["userFirstName", "verificationCode", "verificationLink", "organization"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Email sent successfully",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Reset password email sent successfully"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request - Missing parameters",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "Missing required parameters"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "An unexpected error occurred"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
