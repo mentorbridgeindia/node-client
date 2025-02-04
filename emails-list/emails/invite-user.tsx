@@ -18,7 +18,7 @@ interface InviteUserEmailProps {
   applicationName?:string;
   organizationName?: string;
   emails?:string;
-  urlLink?:string;
+  website?:string;
   rawUrl?:string;
 }
 
@@ -29,7 +29,7 @@ const baseUrl = process.env.VERCEL_URL
 export const InviteUserEmail = ({
   organizationName,
   emails,
-  urlLink,
+  website,
   applicationName,
   rawUrl,
 }: InviteUserEmailProps) => {
@@ -64,7 +64,7 @@ export const InviteUserEmail = ({
             <Section className="text-center mt-[32px] mb-[32px]">
               <Button
                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-5 py-3"
-                href= {urlLink}
+                href= {website}
               >
                 Join the team
               </Button>
