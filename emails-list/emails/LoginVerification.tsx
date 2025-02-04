@@ -14,7 +14,7 @@ import {
   
   interface VerifyEmailProps {
     userFirstName: string;
-    urlLink:string;
+    website:string;
     organization:string;
   }
   
@@ -24,7 +24,7 @@ import {
   
   export const LoginVerifyEmail = ({
     userFirstName,
-    urlLink,
+    website,
     organization,
   }: VerifyEmailProps) => (
     <Html>
@@ -48,7 +48,7 @@ import {
   Stay secured.
 </Text>
           <Section style={btnContainer}>
-            <Button style={button} href={urlLink}>
+            <Button style={button} href={website}>
               Get started
             </Button>
           </Section>

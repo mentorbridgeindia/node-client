@@ -16,7 +16,7 @@ import * as React from "react";
 interface VerifyEmailProps {
   verificationCode?: string;
   organization?:string;
-  urlLink?:string;
+  website?:string;
   
 policyUrl?:string;
 }
@@ -28,7 +28,7 @@ const baseUrl = process.env.VERCEL_URL
 export default function VerifyEmail({
   verificationCode,
   organization,
-  urlLink,
+  website,
   
   policyUrl,
 }: VerifyEmailProps) {
@@ -77,8 +77,8 @@ export default function VerifyEmail({
             This message was produced and distributed by 
      MentorBridge India. All rights reserved 
             of{" "}
-            <Link href={urlLink} target="_blank" style={link}>
-              {urlLink}
+            <Link href={website} target="_blank" style={link}>
+              {website}
             </Link>
             , Inc. View our{" "}
             <Link href={policyUrl} target="_blank" style={link}>

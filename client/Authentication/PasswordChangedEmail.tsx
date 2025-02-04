@@ -14,7 +14,7 @@ import {
   import * as React from "react";
   
   interface PasswordLinkEmailProps {
-    urlLink?: string;
+    website?: string;
     organization?:string;
   }
   
@@ -23,7 +23,7 @@ import {
     : "";
   
   export const PasswordLinkEmail = ({
-    urlLink,
+    website,
     organization,
   }: PasswordLinkEmailProps) => (
     <Html>
@@ -40,7 +40,7 @@ import {
           <Heading style={heading}>🪄 {organization} verification </Heading>
           <Section style={body}>
             <Text style={paragraph}>
-              <Link style={link} href={urlLink}>
+              <Link style={link} href={website}>
                 👉 click here to s{organization} ...👈
               </Link>
             </Text>

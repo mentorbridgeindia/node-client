@@ -22,7 +22,7 @@ export const getEmailContent = (
       emailComponent = <RegisterEmail verificationCode={info.verificationCode}
       organization={info.organization}
       policyUrl={info.policyUrl}
-      urlLink={info.urlLink}
+      website={info.website}
        />;
       break;
 
@@ -42,7 +42,7 @@ export const getEmailContent = (
       break;
 
     case EMAIL_TYPES.PASSWORD_CHANGED:
-      emailComponent = <PasswordChangedEmail urlLink={info.urlLink} />;
+      emailComponent = <PasswordChangedEmail website={info.website} />;
       break;
 
   
@@ -50,7 +50,7 @@ export const getEmailContent = (
       emailComponent = <LoginVerifyEmail 
       organization={info.organization}
       userFirstName={info.userFirstName}
-      urlLink={info.urlLink}  />;
+      website={info.website}  />;
       break;
 
       case EMAIL_TYPES.COMEBACK_EMAIL:
@@ -68,7 +68,7 @@ export const getEmailContent = (
           organizationName={info.organizationName}
           emails={info.email}
           rawUrl={info.rawUrl}
-          urlLink={info.urlLink}
+          website={info.website}
         />
       );
       break;
