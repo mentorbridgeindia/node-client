@@ -7,7 +7,7 @@ import { setupAddRoute } from "./backend/Routes/addRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
 
-const PORT = process.env.PORT || 4444;
+const PORT = Number(process.env.PORT) || 10000;
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
