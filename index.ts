@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
+import { NextFunction, Request, Response } from "express";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
 import { setupAddRoute } from "./backend/Routes/addRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
-import { initiateScraping } from "./backend/Scrap/initiateScraping";
-import { Request, Response, NextFunction } from "express";
+
+const PORT = process.env.PORT || 4444;
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
@@ -33,8 +34,8 @@ setupDynamicRoutes(app);
 setupAddRoute(app);
 // setupDefaultRoute(app);
 
-app.listen(4444, () => {
-  console.log("Server is running on port 4444");
+app.listen(PORT, () => {
+  console.log("Server is running on port " + PORT);
   // scrapeMedium("https://medium.com/tag/personal-development");
   cronJob();
   // initiateScraping();
