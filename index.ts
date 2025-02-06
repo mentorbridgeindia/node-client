@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 import bodyParser from "body-parser";
+import "dotenv/config";
 import { NextFunction, Request, Response } from "express";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
 import { setupAddRoute } from "./backend/Routes/addRoute";
 import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
-import "dotenv/config";
 
 const PORT = Number(process.env.PORT) || 1000;
 
@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
 
 setupDynamicRoutes(app);
 setupAddRoute(app);
-// setupDefaultRoute(app);
 
 app.listen(PORT, () => {
   console.log("Server is running on port " + PORT);

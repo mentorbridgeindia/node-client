@@ -1,4 +1,4 @@
-import { DatabaseManager } from "./DatabaseManager";
+import { DatabaseManager } from "./databaseManager";
 
 const dbManager = DatabaseManager.getInstance();
 
