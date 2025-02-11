@@ -7,28 +7,28 @@ import { initiateScraping } from "./initiateScraping";
 const cron = require("node-cron");
 
 export const cronJob = () => {
-  cron.schedule("0 0 1 * * *", async function () {
-    console.log("running a task at 1st hour exactly");
+  cron.schedule("0 0 11 30 * *", async function () {
+    console.log("running a task at 11th hour of 30th day of every month");
     await sentenceOfTheDay();
   });
 
-  cron.schedule("0 0 2 * * *", async function () {
-    console.log("running a task at 2nd hour exactly");
+  cron.schedule("0 0 12 30 * *", async function () {
+    console.log("running a task at 12th hour of 30th day of every month");
     await quiz();
   });
 
-  cron.schedule("0 0 3 * * *", async function () {
-    console.log("running a task at 3rd hour exactly");
+  cron.schedule("0 0 13 30 * *", async function () {
+    console.log("running a task at 13th hour of 30th day of every month");
     await puzzle();
   });
 
-  cron.schedule("0 0 4 * * *", async function () {
-    console.log("running a task at 4th hour exactly");
+  cron.schedule("0 0 14 30 * *", async function () {
+    console.log("running a task at 14th hour of 30th day of every month");
     await codingChallenge();
   });
 
-  cron.schedule("0 0 5 * * *", async function () {
-    console.log("running a task at 5th hour exactly");
+  cron.schedule("0 0 15 30 * *", async function () {
+    console.log("running a task at 15th hour of 30th day of every month");
     initiateScraping();
   });
 };

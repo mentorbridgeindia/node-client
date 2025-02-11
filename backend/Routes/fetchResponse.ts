@@ -4,14 +4,12 @@ import { MODEL_LIST_GEN_PROMPT, MODEL_OBJECT_GEN_PROMPT } from "../constants";
 import { GET_MOCK_RESPONSE_URL } from "./constants";
 
 export const fetchResponse = async (req, route, res) => {
-  const response = await axios.get(
-    GET_MOCK_RESPONSE_URL + "/" + route._id,
-    {
-      headers: {
-        clientId: req.headers.clientid,
-      },
-    }
-  );
+  console.log("hitting api to fetch mock response");
+  const response = await axios.get(GET_MOCK_RESPONSE_URL + "/" + route._id, {
+    headers: {
+      clientId: req.headers.clientid,
+    },
+  });
   let prompt = "";
   if (response.data?.listCount > 0) {
     prompt = MODEL_LIST_GEN_PROMPT + response.data?.listCount;
