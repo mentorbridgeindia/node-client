@@ -5,10 +5,10 @@ import "dotenv/config";
 import { NextFunction, Request, Response } from "express";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
 import { setupAddRoute } from "./backend/Routes/addRoute";
-import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
 import { cronJob } from "./backend/Scrap/cronJob";
+import { puzzle } from "./backend/cronjobs/puzzle/puzzle";
 
-const PORT = Number(process.env.PORT) || 1000;
+const PORT = Number(process.env.PORT) || 10000;
 
 app.use(bodyParser.json());
 setupEmailRoutes(app);
@@ -31,12 +31,10 @@ app.get("/", (req, res) => {
   res.send("Hello nodejs !");
 });
 
-setupDynamicRoutes(app);
+// setupDynamicRoutes(app);
 setupAddRoute(app);
 
 app.listen(PORT, () => {
   console.log("Server is running on port " + PORT);
-  // scrapeMedium("https://medium.com/tag/personal-development");
   cronJob();
-  // initiateScraping();
 });

@@ -4,6 +4,8 @@
   "description": "Utility Node JS app for MentorBridge",
   "main": "index.ts",
   "scripts": {
+    "build": "tsc",
+    "deploy": "tsc && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-dev index.ts",
     "scrape": "ts-node-dev backend/Scrap/scrapMedium.ts"
@@ -38,6 +40,6 @@
     "react-email": "^3.0.6",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   }
 }
