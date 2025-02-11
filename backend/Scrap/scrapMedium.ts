@@ -5,7 +5,6 @@ import scrapeWebPage from "./scrap";
 
 // Function to scrape webpage
 export const scrapeMedium = async (url: string) => {
-  console.log("Scraping medium:", url);
   try {
     // Remove unwanted elements by their class
     const excludedClasses = [
@@ -37,18 +36,13 @@ export const scrapeMedium = async (url: string) => {
       return;
     }
     const aiRephrasedResponse = JSON.parse(aiResponse);
-    console.log("AI rephrased response:", aiRephrasedResponse?.title);
     const medium = new Medium({
       title: aiRephrasedResponse.title,
       content: aiRephrasedResponse.content,
       image: response.images[0],
       createdAt: new Date(),
     });
-    console.log("Medium:", medium);
-    const savedMedium = await medium.save();
-    console.log("Saved medium:", savedMedium);
-
-    console.log("Scraping completed!");
+    await medium.save();
   } catch (error) {
     console.error("Error during scraping:", error.message);
   }

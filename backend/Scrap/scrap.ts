@@ -55,7 +55,6 @@ const scrapeWebPage = async (
 
     // Save text to a file
     // fs.writeFileSync(path.join(__dirname, "output.txt"), textContent);
-    // console.log("Text content saved to output.txt");
 
     const images: string[] = [];
     for (const [index, imageUrl] of imageUrls.entries()) {

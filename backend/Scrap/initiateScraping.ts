@@ -23,7 +23,6 @@ export const initiateScraping = async () => {
     "computer-vision",
   ];
   for (const tag of tags) {
-    console.log("Scraping RSS feed for tag:", tag);
     setTimeout(async () => {
       const rssUrl = `https://medium.com/feed/tag/${tag}`;
       const links = await getLinksFromRSS(rssUrl);
@@ -36,8 +35,6 @@ export const initiateScraping = async () => {
           }
           await scrapeMedium(link);
         });
-      } else {
-        console.log("No links found in the RSS feed.");
       }
     }, 1000 * 120);
   }

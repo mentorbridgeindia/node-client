@@ -36,7 +36,6 @@ export const quiz = async () => {
   ];
   for (let topic of topics) {
     const response = await callAi(QUIZ_PROMPT, topic, "application/json");
-    console.log(response);
     if (!response) {
       console.error("No content returned from AI response.");
       return null;

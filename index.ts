@@ -6,7 +6,6 @@ import { NextFunction, Request, Response } from "express";
 import { setupEmailRoutes } from "./backend/Email/sendEmail";
 import { setupAddRoute } from "./backend/Routes/addRoute";
 import { cronJob } from "./backend/Scrap/cronJob";
-import { puzzle } from "./backend/cronjobs/puzzle/puzzle";
 
 const PORT = Number(process.env.PORT) || 10000;
 
@@ -31,7 +30,6 @@ app.get("/", (req, res) => {
   res.send("Hello nodejs !");
 });
 
-// setupDynamicRoutes(app);
 setupAddRoute(app);
 
 app.listen(PORT, () => {

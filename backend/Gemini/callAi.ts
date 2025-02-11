@@ -29,19 +29,18 @@ export const callAi = async (
     ],
     generationConfig,
   };
-  console.log("Generating AI response", requestBody.contents[0].parts[0].text);
+  // console.log("Generating AI response", requestBody.contents[0].parts[0].text);
   try {
     const response = await axios.post(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAyhAfOqUr0dQy9DTbPPALKMoA7KGkw55M",
       requestBody
     );
-    console.log("AI response:", response.data);
+    // console.log("AI response:", response.data);
     const aiResponse = response.data?.candidates[0]?.content?.parts[0]?.text;
     if (!aiResponse) {
       console.error("No content returned from AI response.");
       return null;
     }
-    console.log(aiResponse);
     return aiResponse;
   } catch (error) {
     console.error("Error during AI response generation:", error);

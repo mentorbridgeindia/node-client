@@ -10,7 +10,6 @@ export const sentenceOfTheDay = async () => {
     "",
     "application/json"
   );
-  console.log(response);
   if (!response) {
     console.error("No content returned from AI response.");
     return null;
