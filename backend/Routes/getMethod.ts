@@ -6,3 +6,4 @@ export const getMethod = async (app, path, route) => {
     return fetchResponse(req, route, res);
   });
 };
+
