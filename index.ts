@@ -1,41 +1,48 @@
-const express = require("express");
-const app = express();
+import express from "express";
 import bodyParser from "body-parser";
-import { setupEmailRoutes } from "./backend/Email/sendEmail";
-import { setupAddRoute } from "./backend/Routes/addRoute";
-import { setupDynamicRoutes } from "./backend/Routes/dynamicRoutes";
-import { cronJob } from "./backend/Scrap/cronJob";
-import { initiateScraping } from "./backend/Scrap/initiateScraping";
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
-app.use(bodyParser.json());
-setupEmailRoutes(app);
-const swaggerDocument = require("./swagger.json");
-app.use(express.json());
+import swaggerUi from "swagger-ui-express";
+import fs from "fs";
+import path from "path";
 
+const app = express();
+const PORT = 4444;
+
+app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("client/public"));
+const swaggerPath = path.join(__dirname, "swagger");
+if (!fs.existsSync(swaggerPath)) {
+  console.error(" ERROR: Swagger directory not found!");
+  process.exit(1);
+}
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+const swaggerFiles: Record<string, string> = {
+  "comebackemail": "swaggerComebackEmail.json",
+  "inviteuser": "swaggerInviteUser.json",
+  "loginverifyemail": "swaggerLoginVerifyEmail.json",
+  "passwordchangedemail": "swaggerPasswordChangedEmail.json",
+  "registeremail": "swaggerRegisterEmail.json",
+  "resetemail": "swaggerResetEmail.json",
+  "welcomeemail": "swaggerWelcomeEmail.json"
+};
 
-app.get("/", (req, res) => {
-  // res.sendFile(path.join(__dirname, "client/public/index.html"));
-  res.send("Hello nodejs !");
+Object.entries(swaggerFiles).forEach(([route, file]) => {
+  const filePath = path.join(swaggerPath, file);
+
+  if (fs.existsSync(filePath)) {
+    const swaggerDoc = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    app.use(`/api-docs/${route}`, swaggerUi.serve, (req, res, next) => {
+      swaggerUi.setup(swaggerDoc)(req, res, next);
+    });
+    console.log(` Swagger UI available at: http://localhost:${PORT}/api-docs/${route}`);
+  } else {
+    console.warn(` Swagger file missing: ${filePath}`);
+  }
 });
 
-setupEmailRoutes(app);
-
-// setupDynamicRoutes(app);
-// setupAddRoute(app);
-// setupDefaultRoute(app);
-
-app.listen(4444, () => {
-  console.log("Server is running on port 4444");
-  // scrapeMedium("https://medium.com/tag/personal-development");
-  // cronJob();
-  // initiateScraping();
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
 
