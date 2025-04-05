@@ -4,11 +4,10 @@ import { getMethod } from "./getMethod";
 import { getRoutes } from "./getRoutes";
 import { postMethod } from "./postMethod";
 import { putMethod } from "./putMethod";
-import { IMockApiEntity } from "../Models/MockApi";
 
 export const setupDynamicRoutes = async (app: Express) => {
   const routes = await getRoutes();
-  routes?.forEach((route: IMockApiEntity) => {
+  routes?.forEach((route: any) => {
     const { applicationPath, url, method } = route;
 
     const path = `${applicationPath}${url}`;
